@@ -1,0 +1,62 @@
+﻿@model DepartmentVM
+
+
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+
+    not correct to use a dtos in shred here it will make error so we will 
+    make a view model in pl to handle it between edit and 
+    create
+
+
+
+
+
+
+
+
+
+
+
+*@
+
+
+
+
+
+<div asp-validation-summary="ModelOnly"></div>
+
+<div class="form-group mb-3">
+    <label class="form-label" asp-for="code"></label>
+    <input class="form-control" asp-for="code" />
+    <span class="text-danger" asp-validation-for="code"></span>
+</div>
+
+
+<div class="form-group mb-3">
+    <label class="form-label" asp-for="name"></label>
+    <input class="form-control" asp-for="name" />
+    <span class="text-danger" asp-validation-for="name"></span>
+</div>
+
+<div class="form-group mb-3">
+    <label class="form-label" asp-for="description"></label>
+    <textarea asp-for="description" class="form-control"></textarea>
+
+</div>
+
+<div class="form-group mb-3">
+    <label class="form-label" asp-for="creationdate"></label>
+    <input class="form-control" type="date" asp-for="creationdate" />
+
+</div>
+
+
+
+
+
+
+
+
+

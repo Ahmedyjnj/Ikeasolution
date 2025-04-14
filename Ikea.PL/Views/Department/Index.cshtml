@@ -1,0 +1,115 @@
+﻿@model IEnumerable<DepartmentDto>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Departments  <i class="fa-solid fa-truck"></i></h1>
+
+<a asp-controller="Department" asp-action="Create" class="btn btn-primary"> create new department +</a>
+
+@if (!string.IsNullOrEmpty(TempData["message"] as string))
+    {
+        <div class="alert alert-success mb-3">
+        <h5>@TempData["message"]</h5>
+        </div>
+    }
+
+
+
+
+
+@* <div class="alert alert-info mb-5">
+    <h5>@ViewData["message"]</h5>
+    <h4>@ViewBag.messagefromindexaction</h4>
+</div>
+ *@
+
+@if (Model.Count() > 0)
+{
+    <table class="table table-striped table-hover mt-4">
+        <thead class="text-center">
+            <tr>
+                <th>@Html.DisplayNameFor(D => D.Code)</th> @* here we will use html helper to make flexible name  *@
+                <th>@Html.DisplayNameFor(D => D.Name)</th> @* [Display(Name="Date Of Creation")]*@
+                <th>@Html.DisplayNameFor(D => D.CreationDate)</th> @*he will display this name of model based on annotation in dtos*@
+                <th>Details</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+
+
+        </thead>
+        <tbody>
+            @foreach (var dept in Model)
+            {
+                <tr class="text-center">
+                    <td>@dept.Code</td>
+                    <td>@dept.Name</td>
+                    <td>@dept.CreationDate</td>
+
+                    <partial name="_ButtonsPartial" model="dept.Id" />
+
+
+
+
+
+
+
+
+                </tr>
+                <!-- Modal -->
+                <div class="modal fade" id="deletedepartment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">delete department</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <h4 class="modal-title fs-5" id="exampleModalLabel">are u sure to delete @dept.Name department</h4>
+                            </div>
+
+                          
+
+                            <div class="modal-footer">
+
+                                <form asp-action="Delete" asp-route-deptid="@dept.Id" method="post">
+                                    @* //we need to pass a id only to be deleted by post make delete *@ 
+                                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                                    <div class="mt-4 ">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </tbody>
+
+    </table>
+}
+
+else
+{
+    <div class="alert alert-info mt-3">
+
+        <h3>there is no departments :{ </h3>
+    </div>
+}
+
+
+
+@*the three buttons delete and  is shared between employee index and department*@
+
+
+
+
+
+
+

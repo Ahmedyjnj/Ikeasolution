@@ -1,0 +1,51 @@
+﻿@model DepartmentVM
+@{
+    ViewData["Title"] = "Create Department";
+}
+
+
+
+<div class="row  justify-content-center align-content-center flex-column ">
+    <h1 class="col-6 my-4">create department <i class="fa-regular fa-copy"></i></h1>
+    <form class="col-6" method="post" asp-action="create">
+
+
+       @*  <div asp-validation-summary="ModelOnly"></div> *@
+
+        <partial name="Partials/_CreateEditPartial" model="@Model" />
+
+        <div class="mt-4">
+
+            <input type="submit" value="create" class="btn btn-primary" />|  @*value create is a text of button *@
+            <a asp-controller="department" asp-action="index" class="btn btn-secondary"> back to list </a>
+        </div>
+
+
+
+
+    </form>
+</div>
+
+
+
+
+@section validatescripts
+{
+
+    <partial name="_ValidationScriptsPartial" />
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,44 @@
+﻿@model DepartmentDetailsDto
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Model.name deparyment details </h1> @* in this show we will use a template one for administrator and on for user*@
+
+
+
+
+<partial name="Partials/_DeleteDetailsPartial"  model="Model"/>
+
+
+
+<div class="mt-4">
+    <a asp-action="Index" class="btn btn-secondary">back to list</a>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,201 @@
+﻿@model CreatedEmployeeDto
+
+@inject IDepartmentService departmentService
+
+
+
+@{
+    ViewData["Title"] = "Create Employee";
+     var Departmentss = new SelectList(await departmentService.GetAllDepartments(),nameof(DepartmentDto.Id), nameof(DepartmentDto.Name));
+    /* ViewData["Department"] as IEnumerable<DepartmentDto> ,nameof(DepartmentDto.Id),nameof(DepartmentDto.Name) */
+}
+
+
+
+<div class="row  justify-content-center align-content-center flex-column ">
+
+
+    <h1 class="col-6 my-4">create new Employee <i class="fa-regular fa-copy"></i></h1>
+
+    <form class=" row cols-6 " method="post" asp-action="create"  enctype="multipart/form-data" > @*we should know that make form as enctype that it will sent things rather text *@
+
+
+        <div asp-validation-summary="ModelOnly"></div>
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="Name"></label>
+            <input class="form-control" asp-for="Name" />
+            <span class="text-danger" asp-validation-for="Name"></span>
+        </div>
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" />
+            <span class="text-danger" asp-validation-for="Email"></span>
+        </div>
+
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="Address"></label>
+            <input class="form-control" asp-for="Address" />
+            <span class="text-danger" asp-validation-for="Address"></span>
+        </div>
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="Age"></label>
+            <input class="form-control" asp-for="Age" />
+            <span class="text-danger" asp-validation-for="Age"></span>
+        </div>
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="Salary"></label>
+            <input class="form-control" asp-for="Salary" />
+            <span class="text-danger" asp-validation-for="Salary"></span>
+        </div>
+
+
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="PhoneNumber"></label>
+            <input class="form-control" asp-for="PhoneNumber" />
+            <span class="text-danger" asp-validation-for="PhoneNumber"></span>
+        </div>
+
+        @* //now we need to add a enum as a radio or select menu *@
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="EmployeeType"></label>
+
+            <select asp-for="EmployeeType" asp-items="Html.GetEnumSelectList<EmployeeType>()" class="form-control">
+
+                <option value="null">choose......</option>
+
+
+            </select>
+
+
+        </div>
+
+
+        <div class="form-group col-6">
+            <label class="form-label" asp-for="DepartmentId"></label>
+
+            <select asp-for="DepartmentId" asp-items="@Departmentss" class="form-control">
+
+                <option value="null">choose......</option>
+
+
+            </select>
+
+
+        </div>
+
+
+
+
+
+        <div class="form-group col-6">
+
+            @foreach (Gender genderoption in Enum.GetValues(typeof(Gender)))
+            {
+                <div>
+                    <input type="radio" class="form-check-input" asp-for="Gender"  value="@genderoption"/>
+                
+                <label class="form-check-label" > 
+
+                        @genderoption
+                </label>
+                
+                
+                </div>
+            }
+
+
+        </div>
+
+
+        <div class="form-group col-12">
+            <label class="form-label" asp-for="HiringDate"></label>
+            <input class="form-control" type="date" asp-for="HiringDate" />
+
+        </div>
+
+
+        <div class="form-group col-12" enctype="multipart/form-data">
+            @* enctype="multipart/form-data" *@
+            <label class="form-label" asp-for="Image"></label>
+            <input class="form-control"  type="file"  asp-for="Image" />
+        </div>
+
+
+
+        @* we dont need to type file because image is type iform file *@
+
+
+
+        <div class="form-group col-6">
+            <div class="form-check">
+
+            <input type="checkbox" class="form-check-input" asp-for="IsActive" />
+           
+            <label class="form-check-label" asp-for="IsActive"></label>
+
+           
+            </div>
+        
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <div class="mt-4">
+
+            <input type="submit" value="create" class="btn btn-primary" />|  @*value create is a text of button *@
+            <a asp-controller="department" asp-action="index" class="btn btn-secondary"> back to list </a>
+        </div>
+
+      
+    </form>
+</div>
+
+@section validatescripts
+{
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
